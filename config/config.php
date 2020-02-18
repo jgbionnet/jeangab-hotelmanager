@@ -4,13 +4,13 @@ use App\Service\ServiceContainer;
 
 $configuration = [
     'db' => [
-        'dsn'      => 'mysql:dbname=hbhotelmanager;host=localhost;port=8889;charset=utf8',
+        'dsn'      => 'mysql:dbname=hbhotelmanager;host=localhost;charset=utf8',
         'username' => 'root',
-        'password' => 'root',
+        'password' => '',
     ],
     'env' => [
-        'base_path' => 'http://localhost:8888/mvc-exam',
-        'site_name' => 'HB Hotel Manager'
+        'base_path' => 'http://poo/jeangab-hotelmanager',
+        'site_name' => 'Jean-Gab Hotel Manager'
     ]
 ];
 

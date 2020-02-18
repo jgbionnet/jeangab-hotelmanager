@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+     Client : {{ client.firstname }} {{ client.lastname }}
+{% endblock title %}
+
+{% block content %}
+    <div class="row">
+        <div class="col">
+            <a href="{{env.base_path ~ '/clients'}}">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i> retour à la liste des clients
+            </a>
+            <div class="card">
+                <div class="card-header">{{client.firstname}} {{client.lastname}}</div>
+                <div class="card-body">
+                    <p>Date d'entrée : {{client.entryDate|date("d/m/Y")}}</p/>
+                    <p>Date de départ : {{client.departureDate|date("d/m/Y")}}</p>
+                </div>
+                <div class="card-footer">
+                    <a href="{{ env.base_path ~ '/clients/' ~ client.id ~ '/edit' }}" class="btn btn-warning">Modifier</a>
+                    <a href="{{ env.base_path ~ '/clients/' ~ client.id ~ '/delete' }}" class="btn btn-danger">Supprimer</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock content %}

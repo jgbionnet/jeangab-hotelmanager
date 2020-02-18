@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Création d'une chambre
+{% endblock title %}
+
+{% block content %}
+    <form action="{{ env.base_path ~ '/rooms/new/' }}" method="post" class="form">
+        <div class="form-group">
+            <label for="formNumber">Numéro de chambre</label>
+            <input id="formNumber" type="text" class="form-control" name="number">
+        </div>
+        <div class="pull-right">
+            <button class="btn btn-primary">Créer la chambre</button>
+        </div>
+    </form>
+{% endblock content %}

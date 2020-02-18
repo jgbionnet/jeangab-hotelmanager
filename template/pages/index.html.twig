@@ -1,13 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-Gestionnaire d'hôtels Hb-HotelManager
+Gestionnaire d'hôtels JeanGab-HotelManager
 {% endblock %}
 
 {% block content %}
 
-    <div class="text-center">
-        <h1>Bienvenue sur votre gestionnaire d'hotel HB Hotel Manager !</h1>
+  
+<div class="text-center">
+        <img src="{{ env.base_path ~ '/src/assets/hotel-quebec.jpg'}}"">  
+        <h1>Bienvenue sur votre gestionnaire d'hotel</br>JeanGab Hotel Manager !</h1>
     </div>
 
     <hr>
@@ -43,73 +45,56 @@ Gestionnaire d'hôtels Hb-HotelManager
                 </thead>
 
                 <tbody>
+                    {% for room in rooms %}
                     <tr>
-                        <td>101</td>
+                        <td>{{ room.number }}</td>
                         <td>
+                            {% if room.client.departureDate or room.client.departureDate %}
                             <span class="badge badge-warning">Réservée</span>
-                        </td>
-                        <td>
-                            <span class="badge badge-success">Libre</span>
-                        </td>
-                        <td></td>
-                        <td>2020/03/20</td>
-                        <td>
-                            <a class="btn btn-primary btn-sm" href="{{env.base_path ~ '/rooms/1'}}">
-                                <i class="fa fa-search" aria-hidden="true"></i>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>102</td>
-                        <td>
-                            <span class="badge badge-warning">Réservée</span>
-                        </td>
-                        <td>
-                            <span class="badge badge-success">Libre</span>
-                        </td>
-                        <td></td>
-                        <td>2020/03/20</td>
-                        <td>
-                            <a class="btn btn-primary btn-sm" href="">
-                                <i class="fa fa-search" aria-hidden="true"></i>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>102</td>
-                        <td>
-                            <span class="badge badge-warning">Réservée</span>
-                        </td>
-                        <td>
-                            <span class="badge badge-danger">Occupée</span>
-                        </td>
-                        <td>2020/04/03</td>
-                        <td></td>
-                        <td>
-                            <a class="btn btn-primary btn-sm" href="">
-                                <i class="fa fa-search" aria-hidden="true"></i>
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>102</td>
-                        <td>
+
+                            {% else %}
                             <span class="badge badge-secondary">Non réservée</span>
+
+                            {% endif %}
+                            
                         </td>
                         <td>
+                            {% if (room.client.entryDate < date()|date('Y-m-d')) and (room.client.departureDate > date()|date('Y-m-d')) %}
+                            <span class="badge badge-danger">Occupée</span>
+
+
+                            {% else %}
+                            
                             <span class="badge badge-success">Libre</span>
+
+                            {% endif %}
                         </td>
-                        <td></td>
-                        <td></td>
                         <td>
-                            <a class="btn btn-primary btn-sm" href="">
+                            {% if (room.client.entryDate < date()|date('Y-m-d')) and (room.client.departureDate > date()|date('Y-m-d')) %}
+                            {{ room.client ? room.client.departureDate|date("d/m/Y")  : '' }}
+                            {% else %}
+                            {% endif %}
+                        </td>
+                        <td>
+
+                            {% if (room.client.entryDate < date()|date('Y-m-d')) and (room.client.departureDate > date()|date('Y-m-d')) %}
+                            {% else %}
+                            {{ room.client ? room.client.entryDate|date("d/m/Y")  : '' }}
+                            {% endif %}                        
+                        </td>
+                        <td>
+                            <a class="btn btn-primary btn-sm" href="{{env.base_path ~ '/rooms/' ~ room.id}}">
                                 <i class="fa fa-search" aria-hidden="true"></i>
                             </a>
                         </td>
                     </tr>
+                    {% endfor %}
                 </tbody>
             </table>
 
+
+            
+
         </div>
-    </div>
+    </div>    
 {% endblock %}
